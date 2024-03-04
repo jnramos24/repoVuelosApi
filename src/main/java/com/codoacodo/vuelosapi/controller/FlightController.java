@@ -26,20 +26,18 @@ public class FlightController {
     }
 
     @PostMapping("/agregar")
-    public void createFlight(){
-        flightService.crearVuelo();
+    public void createFlight(@RequestBody Flight flight){
+        flightService.crearVuelo(flight);
     }
 
-    @GetMapping("/id")
-    public Flight findFlightById(){
-        Long id = 3L;
-        Flight vueloEncontrado = flightService.buscarVueloPorId(id);
-        return vueloEncontrado;
+    @GetMapping("/{id}")
+    public Flight findFlightById(@PathVariable Long id){
+        return flightService.buscarVueloPorId(id);
     }
 
-    @DeleteMapping("/eliminar")
-    public void deleteFlight(){
-        Long id = 3L;
+    @DeleteMapping("/eliminar/{id}")
+    public void deleteFlight(@PathVariable Long id){
+
         flightService.borrarVueloPorId(id);
     }
 
