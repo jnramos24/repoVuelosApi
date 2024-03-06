@@ -16,11 +16,6 @@ public class FlightController {
     FlightService flightService;
 
     @GetMapping("")
-    public Flight getFlight(){
-      return flightService.devolverVuelo();
-    }
-
-    @GetMapping("/todos")
     public List<Flight> getAllFlights(){
         return flightService.traerTodosLosVuelos();
     }
@@ -41,6 +36,10 @@ public class FlightController {
         flightService.borrarVueloPorId(id);
     }
 
+    @PutMapping("/actualizar")
+    public Flight updateFlight(@RequestBody Flight flight){
+        return flightService.actualizarVuelo(flight);
+    }
 
 
 

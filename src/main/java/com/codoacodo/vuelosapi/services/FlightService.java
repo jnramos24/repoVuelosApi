@@ -14,12 +14,8 @@ public class FlightService {
     @Autowired
     VuelosRepository vuelosRepository;
 
-    public Flight devolverVuelo() {
-              return null;
-    }
-
     public List<Flight> traerTodosLosVuelos() {
-        return null;
+        return vuelosRepository.findAll();
     }
 
     public void crearVuelo(Flight flight) {
@@ -38,4 +34,8 @@ public class FlightService {
     }
 
 
+    public Flight actualizarVuelo(Flight flight) {
+        vuelosRepository.save(flight);
+        return vuelosRepository.findById(flight.getId()).orElse(null);
+    }
 }
