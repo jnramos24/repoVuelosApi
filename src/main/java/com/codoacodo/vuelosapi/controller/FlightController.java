@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/flights")
@@ -27,7 +28,7 @@ public class FlightController {
     }
 
     @GetMapping("/{id}")
-    public Flight findFlightById(@PathVariable Long id){
+    public Optional<Flight> findFlightById(@PathVariable Long id){
         return flightService.findById(id);
     }
 
@@ -37,15 +38,26 @@ public class FlightController {
     }
 
     @PutMapping("/update")
-    public Flight updateFlight(@RequestBody Flight flight){
+    public Optional<Flight> updateFlight(@RequestBody Flight flight){
         return flightService.update(flight);
     }
 
-    /*
+
+    @GetMapping("/origin")
+    public List<Flight> getFlightsByLocations(@RequestParam String origin) {
+        return flightService.getByOrigin(origin);
+    }
+
+    @GetMapping("/offers")
+    public List<Flight> getOffers(){
+        Integer offerPrice = 200;
+        return  flightService.getOffers(offerPrice);
+    }
+
     @GetMapping("/locations")
     public List<Flight> getFlightsByLocations(@RequestParam String origin, @RequestParam String destiny) {
         return flightService.getByOriginAndDestiny(origin, destiny);
-    } */
+    }
 }
 
 
