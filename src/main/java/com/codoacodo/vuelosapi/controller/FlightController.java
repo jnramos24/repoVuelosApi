@@ -6,10 +6,12 @@ import com.codoacodo.vuelosapi.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/vuelos")
+@RequestMapping("/flights")
 public class FlightController {
 
     @Autowired
@@ -17,32 +19,45 @@ public class FlightController {
 
     @GetMapping("")
     public List<Flight> getAllFlights(){
-        return flightService.traerTodosLosVuelos();
+        return flightService.findAll();
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/add")
     public void createFlight(@RequestBody Flight flight){
-        flightService.crearVuelo(flight);
+        flightService.createFlight(flight);
     }
 
     @GetMapping("/{id}")
-    public Flight findFlightById(@PathVariable Long id){
-        return flightService.buscarVueloPorId(id);
+    public Optional<Flight> findFlightById(@PathVariable Long id){
+        return flightService.findById(id);
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteFlight(@PathVariable Long id){
-
-        flightService.borrarVueloPorId(id);
+        flightService.delete(id);
     }
 
-    @PutMapping("/actualizar")
-    public Flight updateFlight(@RequestBody Flight flight){
-        return flightService.actualizarVuelo(flight);
+    @PutMapping("/update")
+    public Optional<Flight> updateFlight(@RequestBody Flight flight){
+        return flightService.update(flight);
     }
 
 
+    @GetMapping("/origin")
+    public List<Flight> getFlightsByLocations(@RequestParam String origin) {
+        return flightService.getByOrigin(origin);
+    }
 
+    @GetMapping("/offers")
+    public List<Flight> getOffers(){
+        Integer offerPrice = 200;
+        return  flightService.getOffers(offerPrice);
+    }
+
+    @GetMapping("/locations")
+    public List<Flight> getFlightsByLocations(@RequestParam String origin, @RequestParam String destiny) {
+        return flightService.getByOriginAndDestiny(origin, destiny);
+    }
 }
 
 
