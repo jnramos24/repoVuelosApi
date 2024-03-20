@@ -25,6 +25,15 @@ public class Flight {
    private double price;
    private String frequency;
 
+   public Flight(String origin, String destiny, String departureTime, String arrivingTime, double price, String frequency) {
+      this.origin = origin;
+      this.destiny = destiny;
+      this.departureTime = departureTime;
+      this.arrivingTime = arrivingTime;
+      this.price = price;
+      this.frequency = frequency;
+   }
+
    public Long getId() {
       return id;
    }
