@@ -1,6 +1,7 @@
 package com.codoacodo.vuelosapi.controller;
 
 
+import com.codoacodo.vuelosapi.models.Dolar;
 import com.codoacodo.vuelosapi.models.Flight;
 import com.codoacodo.vuelosapi.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +37,15 @@ public class FlightController {
         flightService.borrarVueloPorId(id);
     }
 
-    @PutMapping("/actualizar")
+    @PutMapping("/update")
     public Flight updateFlight(@RequestBody Flight flight){
         return flightService.actualizarVuelo(flight);
     }
 
-
-
+    @GetMapping("/precio-dolar")
+    public double getDolar(){
+        return flightService.getDolar();
+    }
 }
 
 

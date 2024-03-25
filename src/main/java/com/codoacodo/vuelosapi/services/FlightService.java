@@ -1,5 +1,7 @@
 package com.codoacodo.vuelosapi.services;
 
+import com.codoacodo.vuelosapi.configuration.FlightConfiguration;
+import com.codoacodo.vuelosapi.models.Dolar;
 import com.codoacodo.vuelosapi.models.Flight;
 import com.codoacodo.vuelosapi.repository.VuelosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class FlightService {
 
     @Autowired
     VuelosRepository vuelosRepository;
+
+    @Autowired
+    FlightConfiguration flightConfiguration;
 
     public List<Flight> traerTodosLosVuelos() {
         return vuelosRepository.findAll();
@@ -37,5 +42,9 @@ public class FlightService {
     public Flight actualizarVuelo(Flight flight) {
         vuelosRepository.save(flight);
         return vuelosRepository.findById(flight.getId()).orElse(null);
+    }
+
+    public double getDolar() {
+        return flightConfiguration.fetchDolar().getPromedio();
     }
 }
