@@ -15,4 +15,9 @@ public class FlightUtils {
                 .filter(flight -> flight.getPrice() < offerPrice)
                 .collect(Collectors.toList());
     }
+
+    public FlightDto flightMapper(Flight flight, double price){
+        return new FlightDto(flight.getId(),flight.getOrigin(), flight.getDestiny(), flight.getDepartureTime(),
+                flight.getArrivingTime(), flight.getPrice() * price, flight.getFrequency());
+    }
 }
