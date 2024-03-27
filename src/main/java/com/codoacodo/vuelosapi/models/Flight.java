@@ -33,12 +33,4 @@ public class Flight {
       this.price = price;
       this.frequency = frequency;
    }
-
-   public Long getId() {
-      return id;
-   }
-
-   public double getPrice() {
-      return price;
-   }
 }

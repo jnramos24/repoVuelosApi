@@ -58,6 +58,11 @@ public class FlightController {
     public List<Flight> getFlightsByLocations(@RequestParam String origin, @RequestParam String destiny) {
         return flightService.getByOriginAndDestiny(origin, destiny);
     }
+
+    @GetMapping("/precio-dolar")
+    public double getDolar(){
+        return flightService.getDolar();
+    }
 }
 
 
