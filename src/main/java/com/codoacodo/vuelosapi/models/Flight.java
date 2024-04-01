@@ -16,19 +16,19 @@ public class Flight {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
-   private String origen;
-   private String destino;
-   private String fechaHoraSalida;
-   private String fechaHoraLlegada;
-   private double precio;
-   private String frecuencia;
+   private String origin;
+   private String destiny;
+   private String departureDate;
+   private String arrivingDate;
+   private double price;
+   private String frequency;
 
-   public Flight(String origen, String destino, String fechaHoraSalida, String fechaHoraLlegada, double precio, String frecuencia) {
-      this.origen = origen;
-      this.destino = destino;
-      this.fechaHoraSalida = fechaHoraSalida;
-      this.fechaHoraLlegada = fechaHoraLlegada;
-      this.precio = precio;
-      this.frecuencia = frecuencia;
+   public Flight(String origin, String destiny, String departureDate, String arrivingDate, double price, String frequency) {
+      this.origin = origin;
+      this.destiny = destiny;
+      this.departureDate = departureDate;
+      this.arrivingDate = arrivingDate;
+      this.price = price;
+      this.frequency = frequency;
    }
 }

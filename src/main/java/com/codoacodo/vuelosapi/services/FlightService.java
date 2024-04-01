@@ -1,47 +1,39 @@
 package com.codoacodo.vuelosapi.services;
 
 import com.codoacodo.vuelosapi.configuration.FlightConfiguration;
-import com.codoacodo.vuelosapi.models.Dolar;
 import com.codoacodo.vuelosapi.models.Flight;
-import com.codoacodo.vuelosapi.repository.VuelosRepository;
+import com.codoacodo.vuelosapi.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FlightService {
-
     @Autowired
-    VuelosRepository vuelosRepository;
-
+    FlightRepository flightRepository;
     @Autowired
     FlightConfiguration flightConfiguration;
 
-    public List<Flight> traerTodosLosVuelos() {
-        return vuelosRepository.findAll();
+    public List<Flight> findAll() {
+        return flightRepository.findAll();
     }
 
-    public void crearVuelo(Flight flight) {
-        vuelosRepository.save(flight);
+    public void createFlight(Flight flight) {
+        flightRepository.save(flight);
     }
 
-    public Flight buscarVueloPorId(Long id) {
-
-        return vuelosRepository.findById(id).orElse(null);
+    public Flight findById(Long id) {
+        return flightRepository.findById(id).orElse(null);
     }
 
-    public void borrarVueloPorId(Long id) {
-
-        vuelosRepository.deleteById(id);
-
+    public void deleteFlight(Long id) {
+        flightRepository.deleteById(id);
     }
 
-
-    public Flight actualizarVuelo(Flight flight) {
-        vuelosRepository.save(flight);
-        return vuelosRepository.findById(flight.getId()).orElse(null);
+    public Flight updateFlight(Flight flight) {
+        flightRepository.save(flight);
+        return flightRepository.findById(flight.getId()).orElse(null);
     }
 
     public double getDolar() {
