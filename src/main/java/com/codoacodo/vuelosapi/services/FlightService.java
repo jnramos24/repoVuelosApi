@@ -1,8 +1,11 @@
 package com.codoacodo.vuelosapi.services;
 
-import com.codoacodo.vuelosapi.configuration.FlightConfiguration;
+import com.codoacodo.vuelosapi.models.Company;
 import com.codoacodo.vuelosapi.models.Flight;
+import com.codoacodo.vuelosapi.models.FlightDto;
+import com.codoacodo.vuelosapi.repository.CompanyRepository;
 import com.codoacodo.vuelosapi.repository.FlightRepository;
+import com.codoacodo.vuelosapi.utils.FlightUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +16,22 @@ public class FlightService {
     @Autowired
     FlightRepository flightRepository;
     @Autowired
-    FlightConfiguration flightConfiguration;
+    CompanyRepository companyRepository;
+    @Autowired
+    FlightUtils flightUtils;
 
-    public List<Flight> findAll() {
-        return flightRepository.findAll();
+    public List<FlightDto> allFlights() {
+        double dolarPrice = getDolar();
+        List<Flight> flights = flightRepository.findAll();
+        return flightUtils.flightMapper(flights, dolarPrice);
     }
 
-    public void createFlight(Flight flight) {
-        flightRepository.save(flight);
+    public Flight createFlight(Flight flight, Long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new IllegalArgumentException("Company not found"));
+
+        flight.setCompany(company);
+        return flightRepository.save(flight);
     }
 
     public Flight findById(Long id) {
@@ -37,6 +48,6 @@ public class FlightService {
     }
 
     public double getDolar() {
-        return flightConfiguration.fetchDolar().getPromedio();
+        return flightUtils.fetchDolar().getPromedio();
     }
 }

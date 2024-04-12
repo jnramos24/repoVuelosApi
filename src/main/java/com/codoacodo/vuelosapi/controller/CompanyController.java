@@ -1,8 +1,7 @@
 package com.codoacodo.vuelosapi.controller;
 
-import com.codoacodo.vuelosapi.models.Flight;
-import com.codoacodo.vuelosapi.models.FlightDto;
-import com.codoacodo.vuelosapi.services.FlightService;
+import com.codoacodo.vuelosapi.models.Company;
+import com.codoacodo.vuelosapi.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,47 +11,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/flights")
-@CrossOrigin("/*")
-public class FlightController {
+@RequestMapping("/companies")
+public class CompanyController {
     @Autowired
-    FlightService flightService;
+    CompanyService companyService;
 
     @GetMapping("")
-    public List<FlightDto> getAllFlights(){
-        return flightService.allFlights();
+    public List<Company> getAllCompanies(){
+        return companyService.allCompanies();
     }
 
     @PostMapping("/add")
-    public Flight createFlight(@RequestBody Flight flight, @RequestParam Long companyId){
-        return flightService.createFlight(flight, companyId);
+    public void createFlight(@RequestBody Company company){
+        companyService.createCompany(company);
     }
 
     @GetMapping("/{id}")
-    public Flight findFlightById(@PathVariable Long id){
-        return flightService.findById(id);
+    public Company findFlightById(@PathVariable Long id){
+        return companyService.findById(id);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteFlight(@PathVariable Long id){
-        flightService.deleteFlight(id);
+        companyService.deleteCompany(id);
     }
 
     @PutMapping("/update")
-    public Flight updateFlight(@RequestBody Flight flight){
-        return flightService.updateFlight(flight);
+    public Company updateCompany(@RequestBody Company company){
+        return companyService.updateCompany(company);
     }
 
-    @GetMapping("/precio-dolar")
-    public double getDolar(){
-        return flightService.getDolar();
-    }
 }
-
-
