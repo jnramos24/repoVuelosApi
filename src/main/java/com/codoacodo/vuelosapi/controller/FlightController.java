@@ -25,8 +25,8 @@ public class FlightController {
     }
 
     @PostMapping("/add")
-    public void createFlight(@RequestBody Flight flight){
-        flightService.createFlight(flight);
+    public Flight createFlight(@RequestBody Flight flight, @RequestParam Long companyId){
+        return flightService.createFlight(flight, companyId);
     }
 
     @GetMapping("/{id}")
@@ -59,11 +59,6 @@ public class FlightController {
     @GetMapping("/locations")
     public List<Flight> getFlightsByLocations(@RequestParam String origin, @RequestParam String destiny) {
         return flightService.getByOriginAndDestiny(origin, destiny);
-    }
-
-    @GetMapping("/allDolars")
-    public List<Dolar> getAllDolars(){
-        return flightService.getAllDolars();
     }
 }
 
